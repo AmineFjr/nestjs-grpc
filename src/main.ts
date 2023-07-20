@@ -1,8 +1,10 @@
-import { NestFactory } from '@nestjs/core';
-import { AppModule } from './app.module';
+import { Module } from '@nestjs/common';
+import { UserController } from './user.controller';
+import { OrderController } from './order.controller';
 
-async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
-  await app.listen(3000);
-}
-bootstrap();
+@Module({
+  imports: [],
+  controllers: [UserController, OrderController],
+  providers: [],
+})
+export class AppModule {}
