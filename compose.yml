@@ -1,13 +1,36 @@
 version: '3.8'
 
 services:
-  mariadb:
+  mariadb1:
     image: mariadb
+    container_name: mariadb1
     ports:
       - "4500:3306"
     environment:
-      MARIADB_ROOT_PASSWORD: passwd
-      MARIADB_DATABASE: nest_grpc
+      MYSQL_ROOT_PASSWORD: passwd
+      MYSQL_DATABASE: nest_grpc_auth
+    networks:
+      - nest-grpc_default
+
+  mariadb2:
+    image: mariadb
+    container_name: mariadb2
+    ports:
+      - "4600:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: passwd
+      MYSQL_DATABASE: nest_grpc_product
+    networks:
+      - nest-grpc_default
+
+  mariadb3:
+    image: mariadb
+    container_name: mariadb3
+    ports:
+      - "4700:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: passwd
+      MYSQL_DATABASE: nest_grpc_user
     networks:
       - nest-grpc_default
 
