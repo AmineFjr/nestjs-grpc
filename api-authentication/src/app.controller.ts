@@ -1,12 +1,8 @@
-import {Controller, Get, Post} from '@nestjs/common';
+import {Controller} from '@nestjs/common';
 import { AppService } from './app.service';
 import {
-  AuthServiceController,
-  DeleteRequest,
-  DeleteResponse,
-  GetRequest,
-  GetResponse, LoginRequest, LoginResponse,
-  RegisterRequest, RegisterResponse, Token, TokenValidationResponse, UpdateRequest, UpdateResponse, User, AUTH_SERVICE_NAME,
+  AuthServiceController, LoginRequest, LoginResponse,
+  RegisterRequest, RegisterResponse, Token, TokenValidationResponse, AUTH_SERVICE_NAME,
   AuthServiceControllerMethods
 } from "./stubs/auth";
 import {Metadata} from "@grpc/grpc-js";
@@ -31,56 +27,11 @@ export class AppController implements AuthServiceController{
   }
 
   @GrpcMethod(AUTH_SERVICE_NAME)
-  async get(request: GetRequest, metadata?: Metadata): Promise<GetResponse>  {
-
-    let user: User;
-    let users: User[] = [];
-    if (request.id) {
-      user = await this.appService.findById(request.id);
-      return { users: [user] };
-    } else if (request.name) {
-      user = await this.appService.findByName(request.name);
-      return { users: [user] };
-    } else {
-      users = await this.appService.findAll();
-      return { users };
-    }
-  }
-
-  @GrpcMethod(AUTH_SERVICE_NAME)
   async login(request: LoginRequest, metadata?: Metadata): Promise<LoginResponse> {
     const accessToken = await this.appService.login(request.email, request.password);
-    return { accessToken };
+    return accessToken ;
   }
 
-
-  @GrpcMethod(AUTH_SERVICE_NAME)
-  async update(request: UpdateRequest, metadata?: Metadata): Promise<UpdateResponse> {
-
-    try {
-         await this.appService.update(request.id , request.user);
-        return {
-          message: 'Update success',
-          success: true,
-      }
-    }catch (e){
-    }
-  }
-
-  @GrpcMethod(AUTH_SERVICE_NAME)
-  async delete (
-      request: DeleteRequest,
-  ): Promise<DeleteResponse> {
-    try {
-      await this.appService.delete(request.id);
-      return {
-        success: true,
-        message: 'Deleted success'
-      }
-    }catch (e) {
-      throw new RpcException("Error during deletion")
-    }
-  }
 
   @GrpcMethod(AUTH_SERVICE_NAME)
   async validateToken(request: Token): Promise<TokenValidationResponse> {

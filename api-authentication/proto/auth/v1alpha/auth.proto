@@ -7,10 +7,7 @@ package auth.v1alpha;
 service AuthService {
   rpc Login(LoginRequest) returns (LoginResponse) {};
   rpc ValidateToken(Token) returns (TokenValidationResponse) {};
-  rpc Get (GetRequest) returns (GetResponse);
   rpc Add (RegisterRequest) returns (RegisterResponse);
-  rpc Update (UpdateRequest) returns (UpdateResponse);
-  rpc Delete (DeleteRequest) returns (DeleteResponse);
 }
 
 message LoginRequest {
@@ -40,33 +37,7 @@ message RegisterResponse {
   string email = 2;
 }
 
-message GetRequest {
-  string name = 1;
-  int32 id = 2;
-}
 
-message GetResponse {
-  repeated User users = 1;
-}
-
-message UpdateRequest {
-  int32 id = 2;
-  User user = 1;
-}
-
-message UpdateResponse {
-  bool success = 1;
-  string message = 2;
-}
-
-message DeleteRequest {
-  int32 id = 1;
-}
-
-message DeleteResponse {
-  bool success = 1;
-  string message = 2;
-}
 
 message Token {
   string accessToken = 1;

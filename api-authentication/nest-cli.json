@@ -1,11 +1,8 @@
 {
   "$schema": "https://json.schemastore.org/nest-cli",
   "collection": "@nestjs/schematics",
-  "sourceRoot": "src",
+  "sourceRoot": "api-authentication/src",
   "compilerOptions": {
-    "assets": [
-      "**/*.proto"
-    ],
     "deleteOutDir": true
   }
 }

@@ -32,34 +32,6 @@ export interface RegisterResponse {
   email: string;
 }
 
-export interface GetRequest {
-  name: string;
-  id: number;
-}
-
-export interface GetResponse {
-  users: User[];
-}
-
-export interface UpdateRequest {
-  id: number;
-  user: User | undefined;
-}
-
-export interface UpdateResponse {
-  success: boolean;
-  message: string;
-}
-
-export interface DeleteRequest {
-  id: number;
-}
-
-export interface DeleteResponse {
-  success: boolean;
-  message: string;
-}
-
 export interface Token {
   accessToken: string;
 }
@@ -75,13 +47,7 @@ export interface AuthServiceClient {
 
   validateToken(request: Token, metadata?: Metadata): Observable<TokenValidationResponse>;
 
-  get(request: GetRequest, metadata?: Metadata): Observable<GetResponse>;
-
   add(request: RegisterRequest, metadata?: Metadata): Observable<RegisterResponse>;
-
-  update(request: UpdateRequest, metadata?: Metadata): Observable<UpdateResponse>;
-
-  delete(request: DeleteRequest, metadata?: Metadata): Observable<DeleteResponse>;
 }
 
 export interface AuthServiceController {
@@ -92,27 +58,15 @@ export interface AuthServiceController {
     metadata?: Metadata,
   ): Promise<TokenValidationResponse> | Observable<TokenValidationResponse> | TokenValidationResponse;
 
-  get(request: GetRequest, metadata?: Metadata): Promise<GetResponse> | Observable<GetResponse> | GetResponse;
-
   add(
     request: RegisterRequest,
     metadata?: Metadata,
   ): Promise<RegisterResponse> | Observable<RegisterResponse> | RegisterResponse;
-
-  update(
-    request: UpdateRequest,
-    metadata?: Metadata,
-  ): Promise<UpdateResponse> | Observable<UpdateResponse> | UpdateResponse;
-
-  delete(
-    request: DeleteRequest,
-    metadata?: Metadata,
-  ): Promise<DeleteResponse> | Observable<DeleteResponse> | DeleteResponse;
 }
 
 export function AuthServiceControllerMethods() {
   return function (constructor: Function) {
-    const grpcMethods: string[] = ["login", "validateToken", "get", "add", "update", "delete"];
+    const grpcMethods: string[] = ["login", "validateToken", "add"];
     for (const method of grpcMethods) {
       const descriptor: any = Reflect.getOwnPropertyDescriptor(constructor.prototype, method);
       GrpcMethod("AuthService", method)(constructor.prototype[method], method, descriptor);
