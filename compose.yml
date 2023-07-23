@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  mariadb:
+    image: mariadb
+    ports:
+      - "4500:3306"
+    environment:
+      MARIADB_ROOT_PASSWORD: passwd
+      MARIADB_DATABASE: nest_grpc
+    networks:
+      - nest-grpc_default
+
+networks:
+  nest-grpc_default:
+    driver: bridge
