@@ -27,11 +27,11 @@
     "@nestjs/jwt": "^10.1.0",
     "@nestjs/microservices": "^10.1.0",
     "@nestjs/platform-express": "^9.0.0",
-    "@prisma/client": "^5.0.0",
+    "@prisma/client": "4.13.0",
     "bcrypt": "^5.1.0",
     "buf": "^0.1.1",
     "nestjs-grpc-reflection": "^0.0.21",
-    "prisma": "^5.0.0",
+    "prisma": "4.13.0",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.2.0"
   },

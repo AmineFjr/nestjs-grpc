@@ -12,7 +12,7 @@ import {
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
 import {ClientGrpc} from "@nestjs/microservices";
-import { UserServiceClient, GetRequest, USER_SERVICE_NAME } from '../../user/src/stubs/user'
+import { UserServiceClient, GetRequest, USER_SERVICE_NAME } from '../../api-user/src/stubs/user'
 import {firstValueFrom} from "rxjs";
 
 @Injectable()

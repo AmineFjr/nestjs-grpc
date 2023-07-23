@@ -6,7 +6,7 @@ import {JwtModule} from "@nestjs/jwt";
 import * as process from "process";
 import {ClientsModule, Transport} from "@nestjs/microservices";
 import {join} from "path";
-import { USER_V1ALPHA_PACKAGE_NAME } from '../../user/src/stubs/user'
+import { USER_V1ALPHA_PACKAGE_NAME } from '../../api-user/src/stubs/user'
 @Module({
   imports: [
     JwtModule.register({
